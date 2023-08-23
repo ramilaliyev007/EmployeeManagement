@@ -25,4 +25,8 @@
 		<ProjectReference Include="..\..\Infrastructure\Persistance\EmployeeManagement.Repository.EfCore\EmployeeManagement.Repository.EfCore.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="wwwroot\" />
+	</ItemGroup>
+
 </Project>

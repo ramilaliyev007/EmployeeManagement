@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EmployeeManagement.Repository.EfCore.Migrations
 {
     [DbContext(typeof(EmployeeManagementDbContext))]
-    [Migration("20230823135720_NewMigration")]
-    partial class NewMigration
+    [Migration("20230823140409_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
