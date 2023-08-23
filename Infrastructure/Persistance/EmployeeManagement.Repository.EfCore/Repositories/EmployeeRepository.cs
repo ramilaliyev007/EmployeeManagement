@@ -18,19 +18,35 @@ namespace EmployeeManagement.Repository.EfCore.Repositories
 
         public async Task<PageListResponse<Employee>> GetAllAsync(AllEmployeePageRequest request)
         {
+            // WhereIf and PageBy are extension method
+            // For more information, see the QueryableExtensions.cs file
+
             var query = _dbSet.Include(x => x.Department)
                               .WhereIf(request.DepartmentId.HasValue, x => x.DepartmentId == request.DepartmentId)
                               .WhereIf(!request.Name.IsNullOrEmpty(), x => EF.Functions.Like(x.Name, $"%{request.Name}%"))
-                              .WhereIf(!request.Surname.IsNullOrEmpty(), x => EF.Functions.Like(x.Surname, $"%{request.Surname}%"))
-                              .PageBy(request);
+                              .WhereIf(!request.Surname.IsNullOrEmpty(), x => EF.Functions.Like(x.Surname, $"%{request.Surname}%"));
 
             var totalCount = await query.CountAsync();
 
-            var employees = await query.AsNoTracking().ToListAsync();
+            var employees = await query.PageBy(request)
+                                       .AsNoTracking()
+                                       .ToListAsync();
 
             var result = new PageListResponse<Employee>(request.Take, totalCount, employees);
 
             return result;
+        }
+
+        public async override Task<List<Employee>> GetAllAsync()
+        {
+            return await _dbSet.Include(x => x.Department)
+                               .AsNoTracking()
+                               .ToListAsync();
+        }
+
+        public override async Task<Employee?> GetByIdAsync(int id)
+        {
+            return await _dbSet.Include(x => x.Department).FirstOrDefaultAsync(x => x.Id == id);
         }
     }
 }

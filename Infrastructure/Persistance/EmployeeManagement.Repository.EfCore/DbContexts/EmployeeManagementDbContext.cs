@@ -1,4 +1,6 @@
-﻿using EmployeeManagement.Domain.Entities;
+﻿using EmployeeManagement.Domain.Common.QueryFilters;
+using EmployeeManagement.Domain.Entities;
+using EmployeeManagement.Repository.EfCore.DbContexts.Interceptors;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
@@ -15,11 +17,24 @@ namespace EmployeeManagement.Repository.EfCore.DbContexts
 
         }
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.AddInterceptors(new LastModifiedDateInterceptor())
+                          .AddInterceptors(new SoftDeleteInterceptor());
+
+            base.OnConfiguring(optionsBuilder);
+        }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+        }
+
+        public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default)
+        {
+            return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
         }
     }
 }

@@ -4,6 +4,7 @@ using EmployeeManagement.Domain.Common.Exceptions;
 using EmployeeManagement.Domain.Entities;
 using EmployeeManagement.Repository.Contracts.Repositories;
 using EmployeeManagement.Repository.EfCore.DbContexts;
+using EmployeeManagement.Repository.EfCore.Extensions;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 
@@ -47,39 +48,40 @@ namespace EmployeeManagement.Repository.EfCore.Repositories
 
         public virtual async Task DeleteByIdAsync(TId id)
         {
-            // TODO: Refactor this.
-            // Remove Attach and use the ExecuteDeleteAsync after Upgrage EF Core version to 7.0.0
+            var entity = await GetByIdAsync(id);
 
-            TEntity entity = new()
-            {
-                Id = id
-            };
+            DataNotFoundByIdException.ThrowIfNotFound(entity, id);
 
-            _dbSet.Attach(entity);
-
-            _dbSet.Remove(entity);
+            _dbSet.Remove(entity!);
 
             await Task.CompletedTask;
         }
 
-        public async Task EditAsync(TEntity entity)
+        public virtual Task EditAsync(TEntity entity)
         {
-            var entityInDb = await _dbSet.FindAsync(entity.Id);
+            _dbSet.Update(entity);
 
-            _dbContext.Entry(entityInDb).CurrentValues.SetValues(entity);
+            return Task.CompletedTask;
         }
 
-        public async Task<List<TEntity>> GetAllAsync()
+        public async Task<bool> ExistsById(TId id)
+        {
+            return await _dbSet.AnyAsync(x => x.Id.Equals(id));
+        }
+
+        public virtual async Task<List<TEntity>> GetAllAsync()
         {
             return await _dbSet.AsNoTracking().ToListAsync();
         }
 
-        public async Task<PageListResponse<TEntity>> GetAllAsync(PageRequest pageRequest)
+        public virtual async Task<PageListResponse<TEntity>> GetAllAsync(PageRequest pageRequest)
         {
             var totalCount = await _dbSet.CountAsync();
 
-            var entities = await _dbSet.Skip(pageRequest.Skip)
-                                       .Take(pageRequest.Take)
+            // PageBy is extension method
+            // For more information, see the QueryableExtensions.cs file
+            var entities = await _dbSet.PageBy<TEntity, TId>(pageRequest)
+                                       .AsNoTracking()
                                        .ToListAsync();
 
             var result = new PageListResponse<TEntity>(pageRequest.Take, totalCount, entities);
@@ -87,7 +89,7 @@ namespace EmployeeManagement.Repository.EfCore.Repositories
             return result;
         }
 
-        public async Task<TEntity> GetByIdAsync(TId id)
+        public virtual async Task<TEntity?> GetByIdAsync(TId id)
         {
             return await _dbSet.FindAsync(id);
         }

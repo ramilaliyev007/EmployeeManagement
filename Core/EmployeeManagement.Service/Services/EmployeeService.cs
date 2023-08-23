@@ -1,4 +1,5 @@
 ﻿using EmployeeManagement.Domain.Common.Dtos.Response;
+using EmployeeManagement.Domain.Common.Exceptions;
 using EmployeeManagement.Domain.Entities;
 using EmployeeManagement.Repository.Contracts;
 using EmployeeManagement.Repository.Contracts.Dtos.Department.Request;
@@ -33,35 +34,69 @@ namespace EmployeeManagement.Service.Services
             await _unitOfWork.CommitAsync();
         }
 
-        public Task DeleteByIdAsync(int id)
+        public async Task DeleteByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            await _unitOfWork.Employees.DeleteByIdAsync(id);
+
+            await _unitOfWork.CommitAsync();
         }
 
-        public Task EditAsync(EmployeeEditRequest request)
+        public async Task EditAsync(EmployeeEditRequest request)
         {
-            throw new NotImplementedException();
+            var employee = await _unitOfWork.Employees.GetByIdAsync(request.Id);
+
+            await ValidateOperandsForEditAsync(request, employee);
+
+            request.Adapt(employee);
+
+            await _unitOfWork.Employees.EditAsync(employee!);
+
+            await _unitOfWork.CommitAsync();
         }
 
-        public Task<List<EmployeeResponse>> GetAllAsync()
+        public async Task<List<EmployeeResponse>> GetAllAsync()
         {
-            throw new NotImplementedException();
-        }
+            var resultInternal = await _unitOfWork.Employees.GetAllAsync();
 
-        public async Task<PageListResponse<EmployeeResponse>> GetAllAsync(AllEmployeePageRequest request)
-        {
-            var employeeData = await _unitOfWork.Employees.GetAllAsync(request);
-
-            var mappedEmployeeData = employeeData.List.Adapt<List<EmployeeResponse>>();
-
-            var result = new PageListResponse<EmployeeResponse>(request.Take, employeeData.TotalCount, mappedEmployeeData);
+            var result = resultInternal.Adapt<List<EmployeeResponse>>();
 
             return result;
         }
 
-        public Task<EmployeeResponse> GetByIdAsync(int id)
+        public async Task<PageListResponse<EmployeeResponse>> GetAllAsync(AllEmployeePageRequest request)
         {
-            throw new NotImplementedException();
+            var resultInternal = await _unitOfWork.Employees.GetAllAsync(request);
+
+            var employeeDtos = resultInternal.List.Adapt<List<EmployeeResponse>>();
+
+            var result = new PageListResponse<EmployeeResponse>(request.Take, resultInternal.TotalCount, employeeDtos);
+
+            return result;
         }
+
+        public async Task<EmployeeResponse> GetByIdAsync(int id)
+        {
+            var employee = await _unitOfWork.Employees.GetByIdAsync(id);
+
+            DataNotFoundByIdException.ThrowIfNotFound(employee, id);
+
+            var result = employee!.Adapt<EmployeeResponse>();
+
+            return result;
+        }
+
+        #region Privates
+
+        private async Task ValidateOperandsForEditAsync(EmployeeEditRequest request, Employee? employee)
+        {
+            DataNotFoundByIdException.ThrowIfNotFound(employee, request.Id);
+
+            if (!await _unitOfWork.Departments.ExistsById(request.DepartmentId))
+            {
+                throw new DataNotFoundByIdException("Department is not found", request.DepartmentId);
+            }
+        }
+
+        #endregion
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace EmployeeManagement.Domain.Common.QueryFilters
 {
-    public interface ISoftDelete
+    public interface IHasSoftDelete
     {
         public bool IsDeleted { get; set; }
     }

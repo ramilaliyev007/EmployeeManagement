@@ -3,7 +3,7 @@ using EmployeeManagement.Domain.Common.QueryFilters;
 
 namespace EmployeeManagement.Domain.Entities
 {
-    public class Employee : Entity, ISoftDelete
+    public class Employee : Entity, IHasSoftDelete, IHasCreatedDate, IHasDeletedDate, IHasLastModifiedDate
     {
         public string Name { get; set; }
 
@@ -12,6 +12,10 @@ namespace EmployeeManagement.Domain.Entities
         public DateTime BirthDate { get; set; }
 
         public DateTime CreatedDate { get; set; }
+
+        public DateTime? DeletedDate { get; set; }
+
+        public DateTime? LastModifiedDate { get; set; }
 
         public bool IsDeleted { get; set; }
 

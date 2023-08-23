@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace EmployeeManagement.WebAPI.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("[controller]/[action]")]
     public class EmployeeController : ControllerBase
     {
         private readonly IEmployeeService _employeeService;
@@ -19,18 +19,46 @@ namespace EmployeeManagement.WebAPI.Controllers
             this._employeeService = employeeService;
         }
 
-        [HttpPost("Create")]
-        public async Task CreateAsync(EmployeeCreateRequest request)
+        [HttpPost]
+        public async Task Create([FromBody] EmployeeCreateRequest request)
         {
             await _employeeService.CreateAsync(request);
         }
 
-        [HttpGet("GetAll")]
-        public async Task<PageListResponse<EmployeeResponse>> GetAllAsync([FromQuery] AllEmployeePageRequest request)
+        [HttpPut]
+        public async Task Edit([FromBody] EmployeeEditRequest request)
+        {
+            await _employeeService.EditAsync(request);
+        }
+
+        [HttpGet]
+        public async Task<List<EmployeeResponse>> GetAll()
+        {
+            var result = await _employeeService.GetAllAsync();
+
+            return result;
+        }
+
+        [HttpGet]
+        public async Task<PageListResponse<EmployeeResponse>> GetAllByPage([FromQuery] AllEmployeePageRequest request)
         {
             var result = await _employeeService.GetAllAsync(request);
 
             return result;
+        }
+
+        [HttpGet]
+        public async Task<EmployeeResponse> GetById([FromQuery] int id)
+        {
+            var result = await _employeeService.GetByIdAsync(id);
+
+            return result;
+        }
+
+        [HttpDelete]
+        public async Task DeleteById(int id)
+        {
+            await _employeeService.DeleteByIdAsync(id);
         }
     }
 }

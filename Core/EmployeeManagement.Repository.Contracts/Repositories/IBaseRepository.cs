@@ -19,11 +19,13 @@ namespace EmployeeManagement.Repository.Contracts.Repositories
 
         Task EditAsync(TEntity entity);
 
-        Task<TEntity> GetByIdAsync(TId id);
+        Task<TEntity?> GetByIdAsync(TId id);
 
         Task DeleteByIdAsync(TId id);
 
         Task<List<TEntity>> GetAllAsync();
+
+        Task<bool> ExistsById(TId id);
 
         Task<PageListResponse<TEntity>> GetAllAsync(PageRequest pageRequest);
     }

@@ -26,6 +26,31 @@ namespace EmployeeManagement.Repository.EfCore.MappingConfigurations
             builder.HasMany(x => x.Employees)
                    .WithOne(x => x.Department)
                    .HasForeignKey(x => x.DepartmentId);
+
+            builder.HasQueryFilter(x => !x.IsDeleted);
+
+            builder.HasData(GetSeedData());
+        }
+
+        private List<Department> GetSeedData()
+        {
+            return new List<Department>()
+            {
+                new()
+                {
+                    Id=1,
+                    Name="IT"
+                },
+                new()
+                {
+                    Id=2,
+                    Name="HR"
+                }, new()
+                {
+                    Id=3,
+                    Name="Audit"
+                },
+            };
         }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace EmployeeManagement.Domain.Entities
 {
-    public class Department : Entity, ISoftDelete
+    public class Department : Entity, IHasSoftDelete
     {
         public string Name { get; set; }
 

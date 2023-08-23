@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EmployeeManagement.Repository.EfCore.Migrations
 {
     [DbContext(typeof(EmployeeManagementDbContext))]
-    [Migration("20230822131249_NewMigration")]
+    [Migration("20230823095036_NewMigration")]
     partial class NewMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -48,6 +48,29 @@ namespace EmployeeManagement.Repository.EfCore.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Departments");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            Name = "IT"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            Name = "HR"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            Name = "Audit"
+                        });
                 });
 
             modelBuilder.Entity("EmployeeManagement.Domain.Entities.Employee", b =>
@@ -66,11 +89,17 @@ namespace EmployeeManagement.Repository.EfCore.Migrations
                         .HasColumnType("datetime2")
                         .HasDefaultValueSql("GETDATE()");
 
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("DepartmentId")
                         .HasColumnType("int");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastModifiedDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -87,6 +116,38 @@ namespace EmployeeManagement.Repository.EfCore.Migrations
                     b.HasIndex("DepartmentId");
 
                     b.ToTable("Employees");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            BirthDate = new DateTime(1996, 3, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DepartmentId = 1,
+                            IsDeleted = false,
+                            Name = "Ramil",
+                            Surname = "Aliyev"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            BirthDate = new DateTime(1995, 4, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DepartmentId = 1,
+                            IsDeleted = false,
+                            Name = "Kanan",
+                            Surname = "Mammadov"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            BirthDate = new DateTime(1993, 1, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DepartmentId = 2,
+                            IsDeleted = false,
+                            Name = "Yusif",
+                            Surname = "Karimli"
+                        });
                 });
 
             modelBuilder.Entity("EmployeeManagement.Domain.Entities.Employee", b =>

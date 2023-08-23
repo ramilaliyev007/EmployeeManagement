@@ -1,11 +1,6 @@
 ﻿using EmployeeManagement.Domain.Common.Dtos.Requests;
 using EmployeeManagement.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EmployeeManagement.Repository.EfCore.Extensions
 {
