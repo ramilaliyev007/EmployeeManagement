@@ -1,0 +1,49 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "EmployeeManagement.Service.Contracts/1.0.0": {
+        "dependencies": {
+          "EmployeeManagement.Repository.Contracts": "1.0.0"
+        },
+        "runtime": {
+          "EmployeeManagement.Service.Contracts.dll": {}
+        }
+      },
+      "EmployeeManagement.Domain/1.0.0": {
+        "runtime": {
+          "EmployeeManagement.Domain.dll": {}
+        }
+      },
+      "EmployeeManagement.Repository.Contracts/1.0.0": {
+        "dependencies": {
+          "EmployeeManagement.Domain": "1.0.0"
+        },
+        "runtime": {
+          "EmployeeManagement.Repository.Contracts.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "EmployeeManagement.Service.Contracts/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "EmployeeManagement.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "EmployeeManagement.Repository.Contracts/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

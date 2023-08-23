@@ -1,0 +1,109 @@
+{
+  "version": 3,
+  "targets": {
+    "net6.0": {
+      "EmployeeManagement.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/EmployeeManagement.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/EmployeeManagement.Domain.dll": {}
+        }
+      },
+      "EmployeeManagement.Repository.Contracts/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "EmployeeManagement.Domain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/EmployeeManagement.Repository.Contracts.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/EmployeeManagement.Repository.Contracts.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "EmployeeManagement.Domain/1.0.0": {
+      "type": "project",
+      "path": "../EmployeeManagement.Domain/EmployeeManagement.Domain.csproj",
+      "msbuildProject": "../EmployeeManagement.Domain/EmployeeManagement.Domain.csproj"
+    },
+    "EmployeeManagement.Repository.Contracts/1.0.0": {
+      "type": "project",
+      "path": "../EmployeeManagement.Repository.Contracts/EmployeeManagement.Repository.Contracts.csproj",
+      "msbuildProject": "../EmployeeManagement.Repository.Contracts/EmployeeManagement.Repository.Contracts.csproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net6.0": [
+      "EmployeeManagement.Repository.Contracts >= 1.0.0"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\Ramil Aliyev\\.nuget\\packages\\": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "C:\\Users\\Ramil Aliyev\\Documents\\MyProjects\\EmployeeManagement\\Core\\EmployeeManagement.Service.Contracts\\EmployeeManagement.Service.Contracts.csproj",
+      "projectName": "EmployeeManagement.Service.Contracts",
+      "projectPath": "C:\\Users\\Ramil Aliyev\\Documents\\MyProjects\\EmployeeManagement\\Core\\EmployeeManagement.Service.Contracts\\EmployeeManagement.Service.Contracts.csproj",
+      "packagesPath": "C:\\Users\\Ramil Aliyev\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Ramil Aliyev\\Documents\\MyProjects\\EmployeeManagement\\Core\\EmployeeManagement.Service.Contracts\\obj\\",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "C:\\Users\\Ramil Aliyev\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "net6.0"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "projectReferences": {
+            "C:\\Users\\Ramil Aliyev\\Documents\\MyProjects\\EmployeeManagement\\Core\\EmployeeManagement.Repository.Contracts\\EmployeeManagement.Repository.Contracts.csproj": {
+              "projectPath": "C:\\Users\\Ramil Aliyev\\Documents\\MyProjects\\EmployeeManagement\\Core\\EmployeeManagement.Repository.Contracts\\EmployeeManagement.Repository.Contracts.csproj"
+            }
+          }
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "net6.0": {
+        "targetAlias": "net6.0",
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48",
+          "net481"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100-preview.3.23178.7\\RuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}

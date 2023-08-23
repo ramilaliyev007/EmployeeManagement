@@ -1,0 +1,15 @@
+C:\Users\Ramil Aliyev\Documents\MyProjects\EmployeeManagement\Core\EmployeeManagement.Repository.Contracts\obj\Debug\net6.0\EmployeeManagement.Repository.Contracts.csproj.AssemblyReference.cache
+C:\Users\Ramil Aliyev\Documents\MyProjects\EmployeeManagement\Core\EmployeeManagement.Repository.Contracts\obj\Debug\net6.0\EmployeeManagement.Repository.Contracts.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Ramil Aliyev\Documents\MyProjects\EmployeeManagement\Core\EmployeeManagement.Repository.Contracts\obj\Debug\net6.0\EmployeeManagement.Repository.Contracts.AssemblyInfoInputs.cache
+C:\Users\Ramil Aliyev\Documents\MyProjects\EmployeeManagement\Core\EmployeeManagement.Repository.Contracts\obj\Debug\net6.0\EmployeeManagement.Repository.Contracts.AssemblyInfo.cs
+C:\Users\Ramil Aliyev\Documents\MyProjects\EmployeeManagement\Core\EmployeeManagement.Repository.Contracts\obj\Debug\net6.0\EmployeeManagement.Repository.Contracts.csproj.CoreCompileInputs.cache
+C:\Users\Ramil Aliyev\Documents\MyProjects\EmployeeManagement\Core\EmployeeManagement.Repository.Contracts\bin\Debug\net6.0\EmployeeManagement.Repository.Contracts.deps.json
+C:\Users\Ramil Aliyev\Documents\MyProjects\EmployeeManagement\Core\EmployeeManagement.Repository.Contracts\bin\Debug\net6.0\EmployeeManagement.Repository.Contracts.dll
+C:\Users\Ramil Aliyev\Documents\MyProjects\EmployeeManagement\Core\EmployeeManagement.Repository.Contracts\bin\Debug\net6.0\EmployeeManagement.Repository.Contracts.pdb
+C:\Users\Ramil Aliyev\Documents\MyProjects\EmployeeManagement\Core\EmployeeManagement.Repository.Contracts\bin\Debug\net6.0\EmployeeManagement.Domain.dll
+C:\Users\Ramil Aliyev\Documents\MyProjects\EmployeeManagement\Core\EmployeeManagement.Repository.Contracts\bin\Debug\net6.0\EmployeeManagement.Domain.pdb
+C:\Users\Ramil Aliyev\Documents\MyProjects\EmployeeManagement\Core\EmployeeManagement.Repository.Contracts\obj\Debug\net6.0\EmployeeManagement.Repository.Contracts.csproj.CopyComplete
+C:\Users\Ramil Aliyev\Documents\MyProjects\EmployeeManagement\Core\EmployeeManagement.Repository.Contracts\obj\Debug\net6.0\EmployeeManagement.Repository.Contracts.dll
+C:\Users\Ramil Aliyev\Documents\MyProjects\EmployeeManagement\Core\EmployeeManagement.Repository.Contracts\obj\Debug\net6.0\refint\EmployeeManagement.Repository.Contracts.dll
+C:\Users\Ramil Aliyev\Documents\MyProjects\EmployeeManagement\Core\EmployeeManagement.Repository.Contracts\obj\Debug\net6.0\EmployeeManagement.Repository.Contracts.pdb
+C:\Users\Ramil Aliyev\Documents\MyProjects\EmployeeManagement\Core\EmployeeManagement.Repository.Contracts\obj\Debug\net6.0\ref\EmployeeManagement.Repository.Contracts.dll
