@@ -1,11 +1,6 @@
 ﻿using EmployeeManagement.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EmployeeManagement.Repository.EfCore.MappingConfigurations
 {
@@ -26,6 +21,9 @@ namespace EmployeeManagement.Repository.EfCore.MappingConfigurations
             builder.HasMany(x => x.Employees)
                    .WithOne(x => x.Department)
                    .HasForeignKey(x => x.DepartmentId);
+
+            builder.HasIndex(x => new { x.Name, x.IsDeleted })
+                   .IsUnique();
 
             builder.HasQueryFilter(x => !x.IsDeleted);
 

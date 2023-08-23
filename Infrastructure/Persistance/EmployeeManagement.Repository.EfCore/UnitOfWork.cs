@@ -1,7 +1,11 @@
-﻿using EmployeeManagement.Repository.Contracts;
+﻿using EmployeeManagement.Domain.Common.Exceptions;
+using EmployeeManagement.Repository.Contracts;
 using EmployeeManagement.Repository.Contracts.Repositories;
 using EmployeeManagement.Repository.EfCore.DbContexts;
+using EmployeeManagement.Repository.EfCore.Helpers;
 using EmployeeManagement.Repository.EfCore.Repositories;
+using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 
 namespace EmployeeManagement.Repository.EfCore
 {
@@ -45,9 +49,23 @@ namespace EmployeeManagement.Repository.EfCore
             }
         }
 
-        public Task<int> CommitAsync()
+        public async Task<int> CommitAsync()
         {
-            return _dbContext.SaveChangesAsync();
+            try
+            {
+                return await _dbContext.SaveChangesAsync();
+            }
+            catch (DbUpdateException ex) when (ex.InnerException is SqlException
+            {
+                Number: (int)SqlExceptionNumber.DuplicateKey or (int)SqlExceptionNumber.UniqueConstraint
+            })
+            {
+                throw new UniqueConstraintException(innerException: ex);
+            }
+            catch
+            {
+                throw;
+            }
         }
 
         public void Dispose()

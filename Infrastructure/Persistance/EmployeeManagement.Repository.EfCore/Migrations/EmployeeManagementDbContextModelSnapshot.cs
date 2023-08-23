@@ -35,8 +35,14 @@ namespace EmployeeManagement.Repository.EfCore.Migrations
                         .HasColumnType("datetime2")
                         .HasDefaultValueSql("GETDATE()");
 
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastModifiedDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -44,6 +50,9 @@ namespace EmployeeManagement.Repository.EfCore.Migrations
                         .HasColumnType("nvarchar(250)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Name", "IsDeleted")
+                        .IsUnique();
 
                     b.ToTable("Departments");
 
@@ -80,7 +89,7 @@ namespace EmployeeManagement.Repository.EfCore.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<DateTime>("BirthDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("DATE");
 
                     b.Property<DateTime>("CreatedDate")
                         .ValueGeneratedOnAdd()

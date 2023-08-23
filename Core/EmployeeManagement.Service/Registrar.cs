@@ -11,6 +11,8 @@ namespace EmployeeManagement.Service
         {
             services.AddScoped<IEmployeeService, EmployeeService>();
 
+            services.AddScoped<IDepartmentService, DepartmentService>();
+
             return services;
         }
     }

@@ -7,5 +7,7 @@ namespace EmployeeManagement.Repository.Contracts.Repositories
     public interface IEmployeeRepository : IBaseRepository<Employee>
     {
         Task<PageListResponse<Employee>> GetAllAsync(AllEmployeePageRequest request);
+
+        Task DeleteAllByDepartmentIdAsync(int departmentId);
     }
 }

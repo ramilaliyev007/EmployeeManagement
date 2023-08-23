@@ -2,10 +2,10 @@
 {
     public record PageRequest
     {
-        public int Page { get; init; } = 1;
+        public int PageNumber { get; init; } = 1;
 
-        public int Take { get; init; } = 10;
+        public int PageSize { get; init; } = 10;
 
-        public int Skip => (Page - 1) * Take;
+        public int SkipCount => (PageNumber - 1) * PageSize;
     }
 }

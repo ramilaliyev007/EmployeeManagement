@@ -1,4 +1,6 @@
-﻿using EmployeeManagement.Repository.Contracts.Dtos.Employee.Request;
+﻿using EmployeeManagement.Domain.Common.Dtos.Response;
+using EmployeeManagement.Repository.Contracts.Dtos.Department.Request;
+using EmployeeManagement.Repository.Contracts.Dtos.Employee.Request;
 using EmployeeManagement.Service.Contracts.Dtos.Department.Request;
 using EmployeeManagement.Service.Contracts.Dtos.Department.Response;
 
@@ -16,6 +18,6 @@ namespace EmployeeManagement.Service.Contracts.Services
 
         Task<List<DepartmentResponse>> GetAllAsync();
 
-        Task<List<DepartmentResponse>> GetAllAsync(AllEmployeePageRequest request);
+        Task<PageListResponse<DepartmentResponse>> GetAllAsync(AllDepartmentPageRequest request);
     }
 }

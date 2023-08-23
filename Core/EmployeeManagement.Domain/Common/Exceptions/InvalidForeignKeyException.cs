@@ -8,7 +8,8 @@ namespace EmployeeManagement.Domain.Common.Exceptions
 {
     public class InvalidForeignKeyException : UserFriendlyException
     {
-        public InvalidForeignKeyException(Exception? innerException = default) : this("Invalid foreign key. See innerException for more details", innerException)
+        public InvalidForeignKeyException(Exception? innerException = default)
+            : this("Invalid foreign key. See innerException for more details", innerException)
         {
 
         }

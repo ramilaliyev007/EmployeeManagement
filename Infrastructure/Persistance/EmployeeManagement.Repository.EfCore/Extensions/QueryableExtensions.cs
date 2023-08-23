@@ -38,8 +38,8 @@ namespace EmployeeManagement.Repository.EfCore.Extensions
             where TEntity : Entity<TId>
             where TId : struct
         {
-            return source.Skip(request.Skip)
-                         .Take(request.Take);
+            return source.Skip(request.SkipCount)
+                         .Take(request.PageSize);
         }
     }
 }

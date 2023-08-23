@@ -2,7 +2,8 @@
 {
     public class UserFriendlyException : Exception
     {
-        public UserFriendlyException(Exception? innerException = default) : this("Error occured", innerException)
+        public UserFriendlyException(Exception? innerException = default)
+            : this("Error occured", innerException)
         {
 
         }

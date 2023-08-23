@@ -22,9 +22,14 @@ namespace EmployeeManagement.Repository.EfCore.MappingConfigurations
                    .IsRequired()
                    .HasDefaultValueSql("GETDATE()");
 
+            builder.Property(x => x.BirthDate)
+                   .IsRequired()
+                   .HasColumnType("DATE");
+
             builder.HasOne(x => x.Department)
                    .WithMany(x => x.Employees)
                    .HasForeignKey(x => x.DepartmentId);
+
 
             builder.HasQueryFilter(x => !x.IsDeleted);
 

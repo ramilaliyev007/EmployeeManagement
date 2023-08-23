@@ -84,7 +84,7 @@ namespace EmployeeManagement.Repository.EfCore.Repositories
                                        .AsNoTracking()
                                        .ToListAsync();
 
-            var result = new PageListResponse<TEntity>(pageRequest.Take, totalCount, entities);
+            var result = new PageListResponse<TEntity>(pageRequest.PageSize, totalCount, entities);
 
             return result;
         }

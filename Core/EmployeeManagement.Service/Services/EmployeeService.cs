@@ -27,6 +27,8 @@ namespace EmployeeManagement.Service.Services
 
         public async Task CreateAsync(EmployeeCreateRequest request)
         {
+            await ValidateOperandsForCreateAsync(request);
+
             var employee = request.Adapt<Employee>();
 
             await _unitOfWork.Employees.CreateAsync(employee);
@@ -69,7 +71,7 @@ namespace EmployeeManagement.Service.Services
 
             var employeeDtos = resultInternal.List.Adapt<List<EmployeeResponse>>();
 
-            var result = new PageListResponse<EmployeeResponse>(request.Take, resultInternal.TotalCount, employeeDtos);
+            var result = new PageListResponse<EmployeeResponse>(request.PageSize, resultInternal.TotalCount, employeeDtos);
 
             return result;
         }
@@ -87,13 +89,23 @@ namespace EmployeeManagement.Service.Services
 
         #region Privates
 
+        private async Task ValidateOperandsForCreateAsync(EmployeeCreateRequest request)
+        {
+            await CheckDepartmentExists(request.DepartmentId);
+        }
+
         private async Task ValidateOperandsForEditAsync(EmployeeEditRequest request, Employee? employee)
         {
             DataNotFoundByIdException.ThrowIfNotFound(employee, request.Id);
 
-            if (!await _unitOfWork.Departments.ExistsById(request.DepartmentId))
+            await CheckDepartmentExists(request.DepartmentId);
+        }
+
+        private async Task CheckDepartmentExists(int departmentId)
+        {
+            if (!await _unitOfWork.Departments.ExistsById(departmentId))
             {
-                throw new DataNotFoundByIdException("Department is not found", request.DepartmentId);
+                throw new DataNotFoundByIdException("Department is not found", departmentId);
             }
         }
 

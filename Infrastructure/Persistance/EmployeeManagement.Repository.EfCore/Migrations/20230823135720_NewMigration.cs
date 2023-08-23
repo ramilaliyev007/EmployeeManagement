@@ -17,7 +17,9 @@ namespace EmployeeManagement.Repository.EfCore.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETDATE()"),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    DeletedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    LastModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -32,7 +34,7 @@ namespace EmployeeManagement.Repository.EfCore.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
                     Surname = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
-                    BirthDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    BirthDate = table.Column<DateTime>(type: "DATE", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETDATE()"),
                     DeletedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     LastModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -52,18 +54,18 @@ namespace EmployeeManagement.Repository.EfCore.Migrations
 
             migrationBuilder.InsertData(
                 table: "Departments",
-                columns: new[] { "Id", "IsDeleted", "Name" },
-                values: new object[] { 1, false, "IT" });
+                columns: new[] { "Id", "DeletedDate", "IsDeleted", "LastModifiedDate", "Name" },
+                values: new object[] { 1, null, false, null, "IT" });
 
             migrationBuilder.InsertData(
                 table: "Departments",
-                columns: new[] { "Id", "IsDeleted", "Name" },
-                values: new object[] { 2, false, "HR" });
+                columns: new[] { "Id", "DeletedDate", "IsDeleted", "LastModifiedDate", "Name" },
+                values: new object[] { 2, null, false, null, "HR" });
 
             migrationBuilder.InsertData(
                 table: "Departments",
-                columns: new[] { "Id", "IsDeleted", "Name" },
-                values: new object[] { 3, false, "Audit" });
+                columns: new[] { "Id", "DeletedDate", "IsDeleted", "LastModifiedDate", "Name" },
+                values: new object[] { 3, null, false, null, "Audit" });
 
             migrationBuilder.InsertData(
                 table: "Employees",
@@ -79,6 +81,12 @@ namespace EmployeeManagement.Repository.EfCore.Migrations
                 table: "Employees",
                 columns: new[] { "Id", "BirthDate", "DeletedDate", "DepartmentId", "IsDeleted", "LastModifiedDate", "Name", "Surname" },
                 values: new object[] { 3, new DateTime(1993, 1, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 2, false, null, "Yusif", "Karimli" });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Departments_Name_IsDeleted",
+                table: "Departments",
+                columns: new[] { "Name", "IsDeleted" },
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Employees_DepartmentId",
