@@ -55,10 +55,7 @@ namespace EmployeeManagement.Repository.EfCore
             {
                 return await _dbContext.SaveChangesAsync();
             }
-            catch (DbUpdateException ex) when (ex.InnerException is SqlException
-            {
-                Number: (int)SqlExceptionNumber.DuplicateKey or (int)SqlExceptionNumber.UniqueConstraint
-            })
+            catch (DbUpdateException ex) when (ex.InnerException is SqlException { Number: SqlExceptionNumberConsts.DuplicateKey or SqlExceptionNumberConsts.UniqueConstraint })
             {
                 throw new UniqueConstraintException(innerException: ex);
             }

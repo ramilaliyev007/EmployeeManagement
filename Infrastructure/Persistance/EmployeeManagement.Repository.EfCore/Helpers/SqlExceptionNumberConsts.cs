@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace EmployeeManagement.Repository.EfCore.Helpers
 {
-    internal enum SqlExceptionNumber
+    internal static class SqlExceptionNumberConsts
     {
-        UniqueConstraint = 2627,
+        public const int UniqueConstraint = 2627;
 
-        DuplicateKey = 2601
+        public const int DuplicateKey = 2601;
     }
 }
