@@ -35,7 +35,9 @@ Firstly, you need .NET SDK 6.0 or ASP.NET Core Runtime 6.0 for run the project.
 
 After, you can run the command below with CMD or PowerShell inside the ```..\EmployeeManagement\Presentation\EmployeeManagement.WebAPI``` directory :
 
-```dotnet run``` 
+```
+dotnet run
+``` 
 
 Project will run the ``5114`` port. (You can also change it in ```..\Properties\launchSettings.json``` file)
 
